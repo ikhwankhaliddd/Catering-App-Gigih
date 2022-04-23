@@ -1,24 +1,45 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Gigih Catering App
 
-Things you may want to cover:
+CRUD Based App for Generasi Gigih 2.0 Final Project purpose
 
-* Ruby version
 
-* System dependencies
+![Logo](https://www.anakbangsabisa.org/generasi-gigih/assets/gengigih-logo.png)
 
-* Configuration
 
-* Database creation
+## Run Locally
 
-* Database initialization
+Clone the project
 
-* How to run the test suite
+```bash
+  git clone https://github.com/ikhwankhaliddd/Catering-App-Gigih.git
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Go to the project directory
 
-* Deployment instructions
+```bash
+  cd Catering-App-Gigih
+```
 
-* ...
+Install dependencies
+
+```bash
+  bundle install
+```
+
+Start the server
+
+```bash
+  rails server
+```
+
+
+## Demo
+
+https://gigih-catering.herokuapp.com/
+
+
+## Feedback
+
+If you have any feedback, please reach out to me at ikhwan.khalid99@gmail.com
+
