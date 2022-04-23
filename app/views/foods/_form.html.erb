@@ -1,41 +1,9 @@
-<%#= form_with(model: food) do |form| %>
-  <%# if food.errors.any? %>
-<!--    <div style="color: red">-->
-<!--      <h2><%#= pluralize(food.errors.count, "error") %> prohibited this food from being saved:</h2>-->
-
-<!--      <ul>-->
-        <%# food.errors.each do |error| %>
-<!--          <li><%#= error.full_message %></li>-->
-        <%# end %>
-<!--      </ul>-->
-<!--    </div>-->
-  <%# end %>
-
-<!--  <div>-->
-    <%#= form.label :name, style: "display: block" %>
-    <%#= form.text_field :name %>
-<!--  </div>-->
-
-<!--  <div>-->
-    <%#= form.label :price, style: "display: block" %>
-    <%#= form.text_field :price %>
-<!--  </div>-->
-
-<!--  <div>-->
-    <%#= form.label :category, style: "display: block" %>
-    <%#= form.text_field :category %>
-<!--  </div>-->
-
-<!--  <div>-->
-    <%#= form.submit %>
-<!--  </div>-->
-<%# end %>
 
 <div class="container">
 
   <div class="row justify-content-center">
     <div class="col-10">
-      <%= render 'shared/food_errors' %>
+      <%= render 'shared/errors' , obj: @food %>
       <%= form_with(model: @food, class: "shadow p-3 mb-3 bg-info rounded", local: true) do |f| %>
         <div class="form-group row">
           <%= f.label :name, class: "col-2 col-form-label text-light" %> <br/>
