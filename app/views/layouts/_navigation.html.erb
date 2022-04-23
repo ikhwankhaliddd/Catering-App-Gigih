@@ -18,11 +18,26 @@
           <a class="nav-link" aria-current="page" href="/foods">Menu</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <%= link_to "Orders", users_path, class: "nav-link" %>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
+
+        <% if logged_in? %>
+          <li class="nav-item">
+            <%= link_to current_user.username, user_path(current_user), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= button_to "Logout", logout_path, class: "nav-link btn btn-outline-alert",method: :delete %>
+          </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Login", login_path, class: "nav-link" %>
+            </li>
+
+            <li class="nav-item">
+              <%= link_to "Sign up", signup_path, class: "nav-link" %>
+            </li>
+          <% end %>
+
       </ul>
     </div>
   </div>

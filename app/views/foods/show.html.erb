@@ -16,12 +16,15 @@
       <div class="card text-center mt-4 shadow mb-5 bg-white rounded">
         <div class="card-header fst-italic">
           by <%= @food.user.email if @food.user %>
+          <% link_to gravatar_for(@food.user), user_path(@food.user) %>
         </div>
         <div class="card-body">
           <div class="card-text text-left"><%= "Rp. " + @food.price.to_s %></div>
           <div class="card-text text-left"><%= simple_format(@food.category) %></div>
-          <%= link_to "Edit", edit_food_path(@food), class: "btn btn-outline-info" %>
-          <%= link_to "Delete", food_path(@food), class: "btn btn-outline-danger", method: :delete %>
+          <% if logged_in? && @food.user == current_user %>
+            <%= link_to "Edit", edit_food_path(@food), class: "btn btn-outline-info" %>
+            <%= link_to "Delete", food_path(@food), class: "btn btn-outline-danger", method: :delete %>
+          <% end %>
         </div>
         <div class="card-footer text-muted">
           <small>Created <%= time_ago_in_words(@food.created_at) %> ago,
