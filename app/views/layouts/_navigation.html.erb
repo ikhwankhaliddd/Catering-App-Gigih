@@ -15,15 +15,37 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto ">
         <li class="nav-item ">
-          <a class="nav-link" aria-current="page" href="/foods">Menu</a>
+          <a class="nav-link" aria-current="page" href="/users">Orders</a>
         </li>
-        <li class="nav-item">
-          <%= link_to "Orders", users_path, class: "nav-link" %>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Menu
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+               <% if logged_in? %>
+                <%= link_to "Create new menu", new_food_path, class: "dropdown-item" %>
+              <% end %>
+            </li>
+            <li><%= link_to "View all menus", foods_path, class: "dropdown-item" %></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
         </li>
 
         <% if logged_in? %>
-          <li class="nav-item">
-            <%= link_to current_user.username, user_path(current_user), class: "nav-link" %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= "(Admin)" if current_user.admin?%> Profile [<%= current_user.username %>]
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                  <%= link_to "View your profile", user_path(current_user), class: "dropdown-item" %>
+              </li>
+              <li><%= link_to "Edit your profile", edit_user_path(current_user), class: "dropdown-item" %></li>
+              <li><%= button_to "Delete your profile", user_path(current_user), class: "dropdown-item btn btn-outline-alert text-danger", method: :delete %></li>
+            </ul>
           </li>
           <li class="nav-item">
             <%= button_to "Logout", logout_path, class: "nav-link btn btn-outline-alert",method: :delete %>

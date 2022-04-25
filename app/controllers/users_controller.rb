@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-before_action :set_user, only: [:show, :edit, :update]
+before_action :set_user, only: [:show, :edit, :update, :destroy]
+before_action :require_user , only: [:edit, :update]
+before_action :require_same_user, only: [:update, :edit, :destroy]
   def new
     @user = User.new
   end
@@ -8,7 +10,7 @@ before_action :set_user, only: [:show, :edit, :update]
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      flash[:notice] = "Welcome to Gigih Catering #{@user.username}, you have successfully create an account"
+      flash[:success] = "Welcome to Gigih Catering #{@user.username}, you have successfully create an account"
       redirect_to foods_path
     else
       render 'new'
@@ -20,7 +22,7 @@ before_action :set_user, only: [:show, :edit, :update]
 
   def update
     if @user.update(user_params)
-      flash[:notice] = "Your account was successfully updated"
+      flash[:success] = "Your account was successfully updated"
       redirect_to user_path(@user)
     else
       render 'edit'
@@ -34,6 +36,13 @@ before_action :set_user, only: [:show, :edit, :update]
   def index
     @users = User.all
   end
+
+  def destroy
+    @user.destroy
+    session[:user_id] = nil if @user == current_user
+    flash[:success] = "Account and all of the orders has been deleted"
+    redirect_to root_path
+  end
 end
 
 private
@@ -43,4 +52,11 @@ end
 
 def set_user
   @user = User.find(params[:id])
+end
+
+def require_same_user
+  if current_user != @user && !current_user.admin?
+    flash[:danger] = "You only can edit or delete your order"
+    redirect_to @user
+  end
 end

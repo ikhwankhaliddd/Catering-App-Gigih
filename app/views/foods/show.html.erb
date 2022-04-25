@@ -21,7 +21,7 @@
         <div class="card-body">
           <div class="card-text text-left"><%= "Rp. " + @food.price.to_s %></div>
           <div class="card-text text-left"><%= simple_format(@food.category) %></div>
-          <% if logged_in? && @food.user == current_user %>
+          <% if logged_in? && @food.user == current_user || current_user.admin? %>
             <%= link_to "Edit", edit_food_path(@food), class: "btn btn-outline-info" %>
             <%= link_to "Delete", food_path(@food), class: "btn btn-outline-danger", method: :delete %>
           <% end %>

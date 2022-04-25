@@ -1,5 +1,7 @@
 class FoodsController < ApplicationController
   before_action :set_food, only: %i[ show edit update destroy ]
+  before_action :require_user, except: [:show, :index]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   # GET /foods or /foods.json
   def index
@@ -58,14 +60,22 @@ class FoodsController < ApplicationController
     end
   end
 
-  private
+private
     # Use callbacks to share common setup or constraints between actions.
-    def set_food
-      @food = Food.find(params[:id])
-    end
+def set_food
+  @food = Food.find(params[:id])
+end
 
     # Only allow a list of trusted parameters through.
-    def food_params
-      params.require(:food).permit(:name, :price, :category)
-    end
+def food_params
+  params.require(:food).permit(:name, :price, :category)
 end
+
+def require_same_user
+  if current_user != @food.user && !current_user.admin?
+    flash[:danger] = "You only can edit your order"
+    redirect_to @food
+  end
+end
+end
+

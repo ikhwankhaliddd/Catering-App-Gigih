@@ -16,8 +16,13 @@
             <p class="card-text">Total Biaya Orderan : Rp. <%= user.foods.sum(:price) %></p>
 <!--            <p class="card-text"><%#= truncate(user.foods.category, length: 100) %></p>-->
             <%= link_to "View profile", user_path(user), class: "btn btn-outline-success mb-2" %>
-            <% if logged_in? && user == current_user %>
-              <%= link_to "Edit profie", edit_user_path(user), class: "btn btn-outline-info mb-2" %>
+            <% if logged_in? %>
+              <% if user == current_user%>
+                <%= link_to "Edit profile", edit_user_path(user), class: "btn btn-outline-info mb-2" %>
+              <% end %>
+            <% end %>
+            <% if current_user.admin? %>
+                <%= button_to "Delete user", user_path(user), class: "btn btn-outline-danger mb-2" %>
             <% end %>
           </div>
           <div class="card-footer text-muted">
