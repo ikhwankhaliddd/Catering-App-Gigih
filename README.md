@@ -40,7 +40,7 @@ https://gigih-catering.herokuapp.com/
 
 ## Admin access
 Email : admin@example.com
-<br\>
+<br />
 Password : admin
 
 
