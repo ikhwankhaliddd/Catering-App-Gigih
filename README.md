@@ -38,6 +38,11 @@ Start the server
 
 https://gigih-catering.herokuapp.com/
 
+## Admin access
+Email : admin@example.com
+<br />
+Password : admin
+
 
 ## Feedback
 
