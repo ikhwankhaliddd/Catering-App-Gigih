@@ -68,7 +68,7 @@ end
 
     # Only allow a list of trusted parameters through.
 def food_params
-  params.require(:food).permit(:name, :price, :category)
+  params.require(:food).permit(:name, :price, category_ids: [])
 end
 
 def require_same_user

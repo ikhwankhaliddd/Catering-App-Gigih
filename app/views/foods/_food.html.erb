@@ -7,11 +7,15 @@
             <% if food.user %>
               by <%= link_to food.user.email, user_path(food.user) %>
             <% end %>
+            <% if food.categories.any? %>
+              <div class="mt-2 ">
+                <%= render food.categories %>
+              </div>
+            <% end %>
           </div>
           <div class="card-body">
             <h5 class="card-title"><%= link_to food.name, food_path(food), class: "text-success text-decoration-none" %></h5>
             <p class="card-text"><%= "Rp." + food.price.to_s %></p>
-            <p class="card-text"><%= truncate(food.category, length: 100) %></p>
             <%= link_to "View", food_path(food), class: "btn btn-outline-success mb-2" %>
             <% if logged_in? && (food.user == current_user || current_user.admin?) %>
               <%= link_to "Edit", edit_food_path(food), class: "btn btn-outline-info mb-2" %>
